@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Games Webpage</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+    }
+
+    .game-list {
+      display: flex;
+      justify-content: center;
+      margin: 40px auto;
+    }
+
+    .game-card {
+      background-colorblueviolet;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 300px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 80%;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 My Game Hub</h1>
+    <p>Choose a game to play!</p>
+  </header>
+
+  <main>
+    <section class="game-list">
+      <div class="game-card">
+        <h2>Number Guessing Game</h2>
+        <p>Try to guess the secret number between 1 and 10!</p>
+        <button onclick="startGame()">Play</button>
+      </div>
+    </section>
+
+    <div id="gameArea" class="hidden">
+      <input type="number" id="guessInput" placeholder="Enter a number" />
+      <br>
+      <button onclick="checkGuess()">Submit Guess</button>
+      <p id="result"></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Game Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let secretNumber;
+
+    function startGame() {
+      secretNumber = Math.floor(Math.random() * 10) + 1;
+      document.getElementById('gameArea').classList.remove('hidden');
+      document.getElementById('result').textContent = '';
+      document.getElementById('guessInput').value = '';
+    }
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById('guessInput').value);
+      const result = document.getElementById('result');
+
+      if (isNaN(guess)) {
+        result.textContent = "Please enter a number.";
+        result.style.color = "orange";
+        return;
+      }
+
+      if (guess === secretNumber) {
+        result.textContent = "🎉 Correct! You guessed the number!";
+        result.style.color = "green";
+      } else if (guess > secretNumber) {
+        result.textContent = "Too high! Try again.";
+        result.style.color = "red";
+      } else {
+        result.textContent = "Too low! Try again.";
+        result.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
